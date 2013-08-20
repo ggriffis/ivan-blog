@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.includes(:comments => :replies)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -44,6 +44,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
+        expire_fragment("blog-stuff")
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.json { render json: @post, status: :created, location: @post }
       else
@@ -60,6 +61,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.update_attributes(params[:post])
+        expire_fragment("blog-stuff")
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
         format.json { head :no_content }
       else
@@ -74,7 +76,7 @@ class PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-
+    expire_fragment("blog-stuff")
     respond_to do |format|
       format.html { redirect_to posts_url }
       format.json { head :no_content }

@@ -1,5 +1,5 @@
 <h1>Ivan the Terrible's Blog</h1>
-
+<% cache "blog-stuff" do %>
 <section class="blog">
 <% @posts.each do |post| %>
   <section class="post">
@@ -15,7 +15,7 @@
         <p><%= c.body %></p>
         <div class="reply">
           <% c.replies.each do |r| %>
-            <p><%= r.body %></p>
+            <p><%= r.body  %></p>
           <% end %>
         </div>
       <% end %>
@@ -23,7 +23,7 @@
   </section>
   <% end %>
 </section>
-
+<% end %>
 <br />
 
 <%= link_to 'New Post', new_post_path %>

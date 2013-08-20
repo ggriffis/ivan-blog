@@ -44,6 +44,7 @@ class RepliesController < ApplicationController
 
     respond_to do |format|
       if @reply.save
+        expire_fragment("blog-stuff")
         format.html { redirect_to @reply, notice: 'Reply was successfully created.' }
         format.json { render json: @reply, status: :created, location: @reply }
       else
@@ -60,6 +61,7 @@ class RepliesController < ApplicationController
 
     respond_to do |format|
       if @reply.update_attributes(params[:reply])
+        expire_fragment("blog-stuff")
         format.html { redirect_to @reply, notice: 'Reply was successfully updated.' }
         format.json { head :no_content }
       else
@@ -74,6 +76,7 @@ class RepliesController < ApplicationController
   def destroy
     @reply = Reply.find(params[:id])
     @reply.destroy
+    expire_fragment("blog-stuff")
 
     respond_to do |format|
       format.html { redirect_to replies_url }
