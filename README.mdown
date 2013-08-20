@@ -9,7 +9,7 @@ Since I know you want to read them all, I designed my page to show EVERYTHING on
 I know it is a little slow (but totes worth it!!!!)... _Do you know how I can make it faster?_
 
 Metrics:
-  Cache Miss Average: 100 blog posts per 10,000 ms (.01 blog post / ms)
-  Cache Hit Average: 100 blog posts per 550 ms (.18 blog post / ms)
+  Cache Miss Average: 100 blog posts per 10,000 ms (.01 blog post per ms) (100 ms per blog post)
+  Cache Hit Average: 100 blog posts per 550 ms (.18 blog post / ms) (5.5 ms per blog post)
 
 The Cache Miss metrics were wildly volatile.
